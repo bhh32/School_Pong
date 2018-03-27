@@ -25,7 +25,7 @@ public class NPCPaddle : MonoBehaviour
 
 		if (dist < 11f) 
 		{
-			float tempPos = b.transform.position.y / speed;
+			float tempPos = b.transform.position.y / speed * 1.25f;
 			transform.position = new Vector3(transform.position.x, tempPos, transform.position.z);
 		}
 	}

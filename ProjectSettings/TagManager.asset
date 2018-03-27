@@ -6,6 +6,11 @@ TagManager:
   tags:
   - ScoringWall
   - Ball
+  - ScoringManager
+  - WinText
+  - TopWall
+  - BottomWall
+  - Paddle
   layers:
   - Default
   - TransparentFX
