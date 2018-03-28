@@ -9,12 +9,14 @@ public class Ball : MonoBehaviour
     float ySpeed;
     int rando;
     [SerializeField] float startSpeed;
+    AudioSource bounceSound;
 
     Vector3 v;
-	// Use this for initialization
+
 	void Start () 
 	{
 		rb = GetComponent<Rigidbody2D> ();
+        bounceSound = GetComponent<AudioSource>();
         ResetBall();         
 	}
 
@@ -26,9 +28,15 @@ public class Ball : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.collider.CompareTag("TopWall") || other.collider.CompareTag("BottomWall"))
+        {
+            bounceSound.PlayOneShot(bounceSound.clip);
             v.y *= -1f;
+        }
         else if (other.collider.CompareTag("Paddle"))
+        {
+            bounceSound.PlayOneShot(bounceSound.clip);
             v.x *= -1f;
+        }
     }
 
     public void ResetBall()

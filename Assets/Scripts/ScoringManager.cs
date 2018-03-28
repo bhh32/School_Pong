@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ScoringManager : MonoBehaviour 
 {
@@ -17,11 +18,20 @@ public class ScoringManager : MonoBehaviour
 
     public int PlayerScore
     {
-        set 
+        set
         { 
-            playerScore = value;
-            playerScoreText.text = string.Format("Player: {0}", playerScore);
-            playerScoreShadow.text = playerScoreText.text;
+            if (SceneManager.GetActiveScene().name == "Game")
+            {
+                playerScore = value;
+                playerScoreText.text = string.Format("Player: {0}", playerScore);
+                playerScoreShadow.text = playerScoreText.text;
+            }
+            else
+            {
+                playerScore = value;
+                playerScoreText.text = string.Format("Player 1: {0}", playerScore);
+                playerScoreShadow.text = playerScoreText.text;
+            }
         }
         get { return playerScore; }
     }
@@ -32,9 +42,18 @@ public class ScoringManager : MonoBehaviour
     {
         set
         {
-            npcScore = value;
-            npcScoreText.text = string.Format("NPC: {0}", npcScore);
-            npcScoreShadow.text = npcScoreText.text;
+            if (SceneManager.GetActiveScene().name == "Game")
+            {
+                npcScore = value;
+                npcScoreText.text = string.Format("NPC: {0}", npcScore);
+                npcScoreShadow.text = npcScoreText.text;
+            }
+            else
+            {
+                npcScore = value;
+                npcScoreText.text = string.Format("Player 2: {0}", npcScore);
+                npcScoreShadow.text = npcScoreText.text;
+            }
         }
         get
         {
@@ -58,14 +77,22 @@ public class ScoringManager : MonoBehaviour
     public void Lose()
     {
         winLossCanvas.SetActive(true);
-        winLoseText.text = string.Format("You Lose!");
+        if (SceneManager.GetActiveScene().name == "Game")
+            winLoseText.text = string.Format("You Lose!");
+        else
+            winLoseText.text = string.Format("Player 2 Wins!");
+        
         Time.timeScale = 0f;
     }
 
     public void Win()
     {
         winLossCanvas.SetActive(true);
-        winLoseText.text = string.Format("You Win!");
+        if (SceneManager.GetActiveScene().name == "Game")
+            winLoseText.text = string.Format("You Win!");
+        else
+            winLoseText.text = string.Format("Player 1 Wins!");
+        
         Time.timeScale = 0f;
     }
 }

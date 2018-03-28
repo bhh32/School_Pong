@@ -7,6 +7,10 @@ public class ScoreWall : MonoBehaviour
     ScoringManager scoreMan;
     [SerializeField] Ball ball;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource ballAudio;
+    [SerializeField] AudioClip scoreClip;
+
     void Awake()
     {
         scoreMan = GameObject.FindGameObjectWithTag("ScoringManager").GetComponent<ScoringManager>();
@@ -18,6 +22,7 @@ public class ScoreWall : MonoBehaviour
         {
             scoreMan.PlayerScore++;
 
+            ballAudio.PlayOneShot(scoreClip);
             if (scoreMan.PlayerScore >= 10)
             {
                 scoreMan.PlayerScore = 10;
@@ -32,6 +37,7 @@ public class ScoreWall : MonoBehaviour
         {
             scoreMan.NpcScore++;
 
+            ballAudio.PlayOneShot(scoreClip);
             if (scoreMan.NpcScore >= 10)
             {
                 scoreMan.NpcScore = 10;
